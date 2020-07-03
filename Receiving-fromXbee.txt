@@ -1,0 +1,39 @@
+#include <LiquidCrystal_I2C.h>
+#include <stdlib.h>
+#include <Wire.h>
+LiquidCrystal_I2C lcd(0x27,16,2);
+
+
+String r;
+String b;
+char str[10];
+
+void setup()
+{
+  Serial.begin(115200);
+  lcd.init();
+  lcd.backlight();
+
+}
+
+void loop()
+{
+
+double y;
+double x;
+
+  if (Serial.available() > 0)
+{
+r=Serial.readStringUntil(',');
+lcd.setCursor(1,0);
+lcd.print(r);
+r.toCharArray(str,11);
+y=atof(str);
+Serial.println(y, 4);
+b =Serial.readStringUntil(',');
+lcd.setCursor(1,1);
+lcd.print(b);
+
+}
+ 
+}
